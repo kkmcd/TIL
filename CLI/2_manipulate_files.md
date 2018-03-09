@@ -1,9 +1,9 @@
-# Manipulating files - 파일 조작
+# 2.Manipulating files - 파일 조작
 
 * 기본적으로 텍스트 에디터를 활용하는 법을 모르는 상태에서 진행.
 * 순수 CLI 커맨드로 파일을 다뤄보기.
 
-## Redirceting and appending
+## 2.1 Redirceting and appending
 
 우선 문자열 한줄을 출력해보자
 
@@ -72,7 +72,7 @@ My father took me into the city
 
 
 
-## Listing & New file
+## 2.2 Listing & New file
 
 아마 가장 많이 사용되는 Unix 명령어로 생각되는 `ls`.  (결과 창은 다를 수 있음.)
 
@@ -130,7 +130,7 @@ $ touch .hidden.txt
 
 
 
-##Renaming, copying, deleting 
+##2.3 Renaming, copying, deleting 
 
 이름 바꾸기, 복사하기, 지우기를 차례대로 해 볼 예정이다. 
 
@@ -232,7 +232,7 @@ $
 
 
 
-## 왜 Unix 명령어는 이렇게 짧게 줄여 놨을까
+## 번외: 왜 Unix 명령어는 이렇게 짧게 줄여 놨을까
 
 * `ls` 나 `mv` 같은 명령어는 `list` 나 `move` 같이 써도 될 것 같은데, 왜 외우기 힘들게 줄여놨을까? 
 * 과거에는 인터넷 환경이 지금과 비교했을 때 좋지 않았다, 때문에 중앙 서버 컴퓨터와 사용자가 사용하는 컴퓨터를 연결하여 서버 컴퓨터를 조작할 때 사용자가 입력한 키가 실제 중앙 컴퓨터에 도달하는데 입력 지연(delay)이 상당했다. 즉 터미널에서 실제 `a`키를 입력하면 짧게는1초부터 길게는 몇 초까지의 지연 이후 화면에 `a`가 나타났다는 것. 

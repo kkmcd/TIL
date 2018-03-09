@@ -1,18 +1,18 @@
-# Basics
+# 1. Basics - 기초
 
-## What is CLI?
+## 1.1 What is CLI?
 
 * GUI : 컴퓨터 사용을 쉽게 만들었다. 컴퓨터의 대중화.
 * CLI : In the begging was the command line. **The most powerful and flexible way to interact with a computer**.
 
-## Which OS?
+## 1.2 Which OS?
 
 * Unix Based OS ( Linux, Mac, etc..)
 *  어느순간 반드시 Unix 커맨드들을 알아야 하는 시점이 온다 (서버).
 
 
 
-## Prompt?
+## 1.3 Prompt?
 
 * 컴퓨터가 새로운 명령을 받아드릴 준비가 되었다는 뜻으로 보여주는 표시(Symbol). 이 표시가 떠 있을 때 명령어를 입력하여야 한다.
 
@@ -20,7 +20,7 @@
 
   ​
 
-## 막히면?`Ctrl-C`
+## 1.4 막히면?`Ctrl-C`
 
 일단 `Ctrl-C` (` ^C`) - C stands for cancle
 
@@ -36,7 +36,7 @@ $ cat
 
   ​
 
-##`$ echo`
+##1.5 `$ echo`
 
 * `$ echo` : starndard out(화면출력)
 
@@ -74,7 +74,7 @@ $ cat
 
 
 
-## `$ man`
+## 1.6 `$ man`
 
 * `$ man ` : Manual page(공식 매뉴얼 페이지)
 
@@ -110,20 +110,22 @@ $ cat
 
 
 
-## 편리한 Tips & Shortcuts(소문자 대문자 구분 없음)
+## 1.7 편리한 Tips & Shortcuts
 
-| Keybinding        | Description                                     |
-| ----------------- | ----------------------------------------------- |
-| ``←``,  `→`       | 커서 이동                                       |
-| `↑` ,`↓`          | 이전 명령어, 다음 명령어                        |
-| ` ⌃C`             | 현재 입력중인 작업 취소(Cancle) 이후 새 줄 실행 |
-| `⌃L`  (`$ clear`) | 터미널 깔끔하게 만들기(cLear)                   |
-| `⌃A` (`fn +  ←`)  | 현재 입력중인 줄 맨 앞으로 커서 이동            |
-| `⌃E` (`fn +  →`)  | 현재 입력중인 줄 맨 뒤로 커서 이동              |
-| `⌃U`              | 현재 입력중인 줄 전체 삭제                      |
-| `⌃W`              | 현재 커서 기준, 단어 단위로 삭제 (Word)         |
-| `⌃D` (`$ exit`)   | 터미널 및 다른 프로그램 종료                    |
-|                   |                                                 |
+* 아래 `⌃`(Ctrl) 뒤의 알파벳은 소문자 대문자를 구분하지 않는다.
+
+| Keybinding           | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| ``←``,  `→`          | 커서 이동                                       |
+| `↑`(`⌃P`) ,`↓`(`⌃N`) | 이전(Previous) 명령어, 다음(Next) 명령어        |
+| ` ⌃C`                | 현재 입력중인 작업 취소(Cancle) 이후 새 줄 실행 |
+| `⌃L`  (`$ clear`)    | 터미널 깔끔하게 만들기(cLear)                   |
+| `⌃A` (`fn +  ←`)     | 현재 입력중인 줄 맨 앞으로 커서 이동            |
+| `⌃E` (`fn +  →`)     | 현재 입력중인 줄 맨 뒤(End)로 커서 이동         |
+| `⌃U`                 | 현재 입력중인 줄 전체 삭제                      |
+| `⌃W`                 | 현재 커서 기준, 단어 단위로 삭제 (Word)         |
+| `⌃D` (`$ exit`)      | 터미널 및 다른 프로그램 종료                    |
+|                      |                                                 |
 
 ### Exercise
 
