@@ -1,0 +1,41 @@
+PING google.com (216.58.221.14): 56 data bytes
+64 bytes from 216.58.221.14: icmp_seq=0 ttl=51 time=68.487 ms
+64 bytes from 216.58.221.14: icmp_seq=1 ttl=51 time=63.871 ms
+64 bytes from 216.58.221.14: icmp_seq=2 ttl=51 time=69.212 ms
+64 bytes from 216.58.221.14: icmp_seq=3 ttl=51 time=62.727 ms
+64 bytes from 216.58.221.14: icmp_seq=4 ttl=51 time=71.560 ms
+64 bytes from 216.58.221.14: icmp_seq=5 ttl=51 time=67.697 ms
+64 bytes from 216.58.221.14: icmp_seq=6 ttl=51 time=69.199 ms
+64 bytes from 216.58.221.14: icmp_seq=7 ttl=51 time=94.937 ms
+64 bytes from 216.58.221.14: icmp_seq=8 ttl=51 time=82.730 ms
+64 bytes from 216.58.221.14: icmp_seq=9 ttl=51 time=88.429 ms
+64 bytes from 216.58.221.14: icmp_seq=10 ttl=51 time=68.669 ms
+64 bytes from 216.58.221.14: icmp_seq=11 ttl=51 time=68.727 ms
+64 bytes from 216.58.221.14: icmp_seq=12 ttl=51 time=63.187 ms
+64 bytes from 216.58.221.14: icmp_seq=13 ttl=51 time=89.207 ms
+64 bytes from 216.58.221.14: icmp_seq=14 ttl=51 time=170.722 ms
+64 bytes from 216.58.221.14: icmp_seq=15 ttl=51 time=149.490 ms
+64 bytes from 216.58.221.14: icmp_seq=16 ttl=51 time=81.729 ms
+64 bytes from 216.58.221.14: icmp_seq=17 ttl=51 time=77.990 ms
+64 bytes from 216.58.221.14: icmp_seq=18 ttl=51 time=74.309 ms
+64 bytes from 216.58.221.14: icmp_seq=19 ttl=51 time=83.041 ms
+64 bytes from 216.58.221.14: icmp_seq=20 ttl=51 time=82.058 ms
+64 bytes from 216.58.221.14: icmp_seq=21 ttl=51 time=77.213 ms
+64 bytes from 216.58.221.14: icmp_seq=22 ttl=51 time=81.139 ms
+64 bytes from 216.58.221.14: icmp_seq=23 ttl=51 time=86.597 ms
+64 bytes from 216.58.221.14: icmp_seq=24 ttl=51 time=77.156 ms
+64 bytes from 216.58.221.14: icmp_seq=25 ttl=51 time=82.189 ms
+64 bytes from 216.58.221.14: icmp_seq=26 ttl=51 time=84.230 ms
+64 bytes from 216.58.221.14: icmp_seq=27 ttl=51 time=80.161 ms
+64 bytes from 216.58.221.14: icmp_seq=28 ttl=51 time=86.543 ms
+64 bytes from 216.58.221.14: icmp_seq=29 ttl=51 time=63.732 ms
+64 bytes from 216.58.221.14: icmp_seq=30 ttl=51 time=73.685 ms
+64 bytes from 216.58.221.14: icmp_seq=31 ttl=51 time=71.012 ms
+64 bytes from 216.58.221.14: icmp_seq=32 ttl=51 time=66.209 ms
+64 bytes from 216.58.221.14: icmp_seq=33 ttl=51 time=69.671 ms
+64 bytes from 216.58.221.14: icmp_seq=34 ttl=51 time=82.919 ms
+64 bytes from 216.58.221.14: icmp_seq=35 ttl=51 time=80.331 ms
+
+--- google.com ping statistics ---
+36 packets transmitted, 36 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 62.727/80.855/170.722/21.065 ms

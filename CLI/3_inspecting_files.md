@@ -30,6 +30,7 @@ $ ls -rtl
 ```
 
 * Option 으로 대문자 `O` 와 `L` 이 있다. (자세한건  `man curl` 참조)
+  * `man` 페이지 검색은 `/` 이후 찾고싶은 문자열을 입력 -> `enter`하고 `n` 키(next)로 넘겨가며 찾는다.
 * `ls -rtl` 명령을 통해서 맨 마지막에 `sonnet.txt` 가 잘 추가되었는지 확인하자.
 * `sonnet.txt` 는 총 2620 줄로, `cat` 명령어로 확인하기에는 너무 길다. 
 * 남은 부분은 이 2620 줄의 txt 파일을 검사해 보는 것으로 채워질 예정이다.
@@ -47,7 +48,7 @@ $ ls -rtl
 
 
 
-## 3.2 Making `head`s and `tail`s of it - 머리와 꼬리만  
+## 3.2 Making `head`s and `tail`s of it - 무언가를 이해하다. 
 
 파일 검사에서 상호 보완적인 두가지 명령어가 `head` 와 `tail` 이다.
 
@@ -146,9 +147,137 @@ $ head sonnets.txt | wc
   * 파이프는 **명령(command)**과 그에 의해 실행되는 **프로세스**와 관련이 있다.
   * `[command_A] | [command_B]` 에서 command_A 의 출력을 command_B 의 입력으로 보낸다.
 
+---
+
 ### Exercise
 
 1. `$ tail sonnets.txt` 의 결과를 `wc` 로 파이프하여 확인해 보자.
 2. `$ man head` 를 실행하여 `$ head <file>` 할 때 기본적으로 설정된 `<file>` 의 첫 10줄이 아닌 처음 - N번째 줄 까지 보여주는 법을 찾아보자. 
-3.  
+3. 2 에서 배운걸 활용하여, `sonnets.txt` 의 챕터 `I` 만을 출력하되, 뒤에서 14줄만을 출력해 보도록 하자. (*Hint* : 커맨드는 `head -n <i> sonnets.txt | tail -n <j>` 와 같은 형태로 나타날 것이며, `<i>, <j>` 는 `-n` 옵션을 위한 정수 인자이다.)
+4. `tail` 명령어의 가장 유용한 응용은, `tail -f` 명령어를 활용해서, 해당 파일이 실시간으로 변하는걸 보여주는 것이다. 이것은 특히 특정 웹 서버의 로그(log)를 감시(monitoring) 할 때 ([tailing the log file](https://ko.wikipedia.org/wiki/Tail)) 많이 쓰인다. 로그 파일을 시뮬레이팅 해보기 위해, 
+   1. `$ ping google.com` 를 통해 구글에 핑을 보내보자. (`ping` 명령은 서버가 작동하는지 핑을 보내본다. 자세한 건 `man` 페이지 참조!) 
+   2. 잘 응답하는걸 확인 하고  `⌃C` 로 해당 프로세스를 종료.
+   3. 이번에는 해당 핑 로그를 파일에 저장해보자. `$ ping google.com > google.log`
+   4. 그리고 새로운 터미널 탭을 켜고 `$ tail -f` 를 통해 `google.log` 파일을 모니터링 해보자.
+
+
+
+## 3.3 `less` is more  
+
+`less` 명령어는 우리가 지금까지 `man` 페이지에서 봐오던, 일종의 미리보기 창이다.
+
+```shell
+$ less sonnets.txt
+Shake-speare's Sonnets
+
+I
+
+From fairest creatures we desire increase,
+That thereby beauty's Rose might never die,
+But as the riper should by time decease,
+His tender heir might bear his memory:
+But thou contracted to thine own bright eyes,
+Feed'st thy light's flame with self-substantial fuel,
+Making a famine where abundance lies,
+Thy self thy foe, to thy sweet self too cruel:
+Thou that art now the world's fresh ornament,
+And only herald to the gaudy spring,
+Within thine own bud buriest thy content,
+And tender churl mak'st waste in niggarding:
+ Pity the world, or else this glutton be,
+ To eat the world's due, by the grave and thee.
+
+II
+
+When forty winters shall besiege thy brow,
+And dig deep trenches in thy beauty's field,
+sonnets.txt
+```
+
+대략 이렇게 생겼다. 
+
+* `man` 페이지와 마찬가지로, `q` 를 누르면 나올 수 있고, 
+* 방향키로 한줄 씩 이동,
+*  `u` (up)키와  `d`(down) 키로 반 페이지씩 이동,
+*  `f`(forward), `b`(back) 키로 한 페이지씩 이동할 수 있다.
+* `/<string>` -> `enter` 을 통해 찾고싶은 문자열을 검색할 수 있으며, 
+* 이후 `n` (next) 키로 다음 검색, `N`(shift-n) 키로 이전 검색이 가능하다.
+  * `/rose` 를 통해 테스트 해보자.
+* 마지막으로 `G`(shift - g) 키는 줄을 의미하는데
+  * `1G` 는 첫번째 줄로,
+  * `100G` 는 백번째 줄로,
+  * `G` 는 파일의 가장 마지막 줄로 이동한다.
+
+한번 `$ less sonnets.txt` 를 통해 위의 커맨드들을 입력하며 익숙해 져 보자.
+
+| 명령어                | 설명                           | 예시    |
+| --------------------- | ------------------------------ | ------- |
+| ` ↑`,` ↓` 키          | 한줄 씩 이동                   |         |
+| `spacebar`, `f` / `b` | 한 페이지 아래 / 위로 이동     |         |
+| `d  ` / `u`           | 반 페이지 아래/위 로 이동      |         |
+| `/<string>`           | 파일에서 `<string>` 검색       | `/rose` |
+| `n`                   | 검색 이후에 다음 키워드로 이동 |         |
+| `N`                   | 이전 키워드로 이동             |         |
+| `q`                   | `less` 종료                    |         |
+
+---
+
+### Exercise
+
+1. `sonnets.txt` 를 `less` 로 실행하고 , 3페이지 아래로 - 3페이지 위로 이동해 보자. 그리고 파일의 마지막 줄로 갔다가 첫 줄로 이동해 보자.
+2. `All` 이라고 하는 문자열을 검색해 보자. 뒤로 이동하면서 몇번 등장하는지 세어보도록 하자. 그리고 `$ grep All sonnets.txt | wc` 라고 입력하고 본인이 세어본 결과와 비교해 보자.( `grep` 는 다음 챕터에서 배운다! )
+3. `man` 페이지가 `less` 프로그램을 사용하는 덕분에, 이제 우리는 `man` 페이지를 좀 더 잘 활용할 수 있게 되었다. `ls` 의 매뉴얼 중에서 "size" 라는 문자열을 찾아서. 파일을 크기순서로 정렬하여 목록을 보여주는 명령어를 찾아보자. 
+
+
+
+## 3.4 Grepping
+
+* 파일의 내용을 검사하는 가장 좋은 방법은 `grep` 이다. `grep` 은  “**g**lobally search a **r**egular **e**xpression and **p**rint”' 의 줄임말이지만 전혀 중요하지 않다. ("regular expression" 이란 정규표현식이라고 번역하는데 나중에 다시 들어볼 기회가 있겠지만 지금단계에서는 무시하자.)
+* `grep` 의 가장 널리 사용되는 부분은, 단순히 파일에서 부분 문자열을 찾는 것이다. 예를 들어 이전 섹션에서 우리는  `less` 로 `sonnets.txt` 를 열고, `/rose` 를 활용하여 "rose"를 검색해 보았다, 
+* 하지만 `grep` 를 활용하면 바로 찾을 수 있다.
+
+```shell
+$ grep rose sonnets.txt
+The rose looks fair, but fairer we it deem
+As the perfumed tincture of the roses.
+Die to themselves. Sweet roses do not so;
+Roses of shadow, since his rose is true?
+Which, like a canker in the fragrant rose,
+Nor praise the deep vermilion in the rose;
+The roses fearfully on thorns did stand,
+  Save thou, my rose, in it thou art my all.
+I have seen roses damask'd, red and white,
+But no such roses see I in her cheeks;
+```
+
+* 다음과 같이 "rose" 가 들어있는 모든 줄만 모아서 바로 볼 수 있다.
+
+---
+
+* 당연하게도 이 출력을 pipe 하여 `wc` 명령의 입력으로 보낼 수 있다.
+
+```shell
+$ grep rose sonnets.txt | wc
+      10      82     419
+```
+
+* `wc` 의 결과물이 말해주기를, "rose" 라고 하는 문자열을 포함하는 줄이 10줄이 있다고 한다.
+* 하지만 "Rose" 라고 하는 문자열은 검색하지 않았다. 대/소문자 구분 때문이다.
+
+---
+
+* 이럴 경우 대/소문자를 구분하지 않고 grep 하는 법을 찾아보자.
+* `$ man grep` 에서`case` 라는 문자열을 찾아서 읽자!
+
+```shell
+$ grep -i rose sonnets.txt | wc
+      12      96     508
+```
+
+* `grep` 유틸리티는 위에 언급한 *regular-expression (정규표현식)* 와의 조합에서 가장 강력하게 활용할 수 있다. 
+* 하지만 지금 우리가 `grep` 와 `grep -i` 만 사용해도 충분히 강력하다. 
+
+---
+
+위의 기능을 활용하여, 실제 개발에서 정말 많이 쓰이는 *grepping process* 에 대해 알아보도록 하자. `grep` 을 사용해 Unix 에서 동작하는 프로세스들을 특정 문자열로 필터링하는 것이다. (Linux, MacOS, iOS, Android 등의 Unix 기반의 시스템에서는  )
 
