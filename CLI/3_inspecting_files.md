@@ -279,5 +279,104 @@ $ grep -i rose sonnets.txt | wc
 
 ---
 
-위의 기능을 활용하여, 실제 개발에서 정말 많이 쓰이는 *grepping process* 에 대해 알아보도록 하자. `grep` 을 사용해 Unix 에서 동작하는 프로세스들을 특정 문자열로 필터링하는 것이다. (Linux, MacOS, iOS, Android 등의 Unix 기반의 시스템에서는  )
+위의 기능을 활용하여, 실제 개발에서 정말 많이 쓰이는 *grepping process* 에 대해 알아보도록 하자. `grep` 을 사용해 Unix 에서 동작하는 프로세스들을 특정 문자열로 필터링하는 것이다. (Linux, MacOS, iOS, Android 등의 Unix 기반의 시스템에서는 **연속적으로 동작하는 프로그램을 프로세스라고 한다.**) 
+
+
+
+프로세스들 중에서 사용자에게 필요없거나 강제로 종료해야할 프로세스가 있는 경우, 
+
+1. `ps aux` 명령어로 전체 프로세스를 확인하고, 
+
+   * 여기서 `ps` 는 **p**rocess **s**tatus 이고, 이상한 이유로 인하여(`man ps` 확인) 옵션 `-aux` 는 `-` 없이 `aux`  로 사용해야 한다.
+
+2. `grep <process_name> ` 명령으로 찾는 프로세스만을 잡아낸다.
+
+   * Ruby on Rails 에서는 `spring` 이라고 하는 테스트 서버 프로그램을 프로세스 리스트에서 찾아 지우는 일이 빈번하다.
+   *  만약 `spring` 이라고 하는 프로세스 찾고 싶다고 한다면 다음과 같이 사용한다. (아래의 출력화며은 가정)
+
+   ```shell
+   $ ps aux | grep spring
+    ubuntu 12241 0.3 0.5 589960 178416 ? Ssl Sep20 1:46
+    spring app | sample_app | started 7 hours ago
+   ```
+
+   * 컴퓨터마다 다르겠지만, 이런 식으로 해당 프로세스가 출력된다. 
+   * 이때 가장 중요한 것은, 처음 나타나는 숫자인데, 이것이 프로세스 id, 줄여서 pid 라고 한다.
+
+3. `top` 명령을 사용하면 가장 cpu 를 많이 점유하는 프로그램 순으로 프로세스들을 보여준다.
+
+   * 뭔가 어려워 보이지만, 단순히 현재 컴퓨터 리소스 사용 현황과 프로세스들을 보여줄 뿐이다.
+
+   ```shell
+   $ top
+   Processes: 392 total, 2 running, 390 sleeping, 1649 threads                                                  18:13:15
+   Load Avg: 1.78, 1.62, 1.58  CPU usage: 1.8% user, 1.20% sys, 97.71% idle
+   SharedLibs: 297M resident, 69M data, 75M linkedit.
+   MemRegions: 89360 total, 5510M resident, 240M private, 2568M shared. PhysMem: 14G used (1995M wired), 2246M unused.
+   VM: 1755G vsize, 1097M framework vsize, 5248(0) swapins, 6784(0) swapouts.
+   Networks: packets: 4588362/5986M in, 2393008/265M out. Disks: 2587908/26G read, 2150385/28G written.
+
+   PID    COMMAND      %CPU TIME     #TH   #WQ  #PORT MEM    PURG   CMPRS  PGRP  PPID  STATE    BOOSTS           %CPU_ME
+   44467  top          3.3  00:00.63 1/1   0    23    4136K+ 0B     0B     44467 28371 running  *0[1]            0.00000
+   44272  Google Chrom 0.0  00:00.05 8     1    73    9256K  0B     0B     44181 44181 sleeping *0[1]            0.00000
+   44216  Google Chrom 0.0  00:02.42 17    1    152   88M    0B     0B     44181 44181 sleeping *0[1]            0.00000
+   44215  Google Chrom 0.0  00:00.96 17    1    151   55M    0B     0B     44181 44181 sleeping *0[1]            0.00000
+   44214  Google Chrom 0.0  00:02.09 17    1    151   83M    0B     0B     44181 44181 sleeping *0[1]            0.00000
+   44209  Google Chrom 0.0  00:49.62 19    1    190   195M   8192B  0B     44181 44181 sleeping *0[1]            0.00000
+   ```
+
+   * `q` 로 종료한다.
+
+4. 원하지 않는 프로세스를 죽이고 싶을 경우에는 `kill` 명령어와 종료코드 `15` 와(`man` 페이지 확인) pid 를 함께 사용하여 종료한다.
+
+   ``` shell
+   $ kill -15 12241
+   ```
+
+5. 만약 이렇게 일일이 pid 를 통해 종료하려는 것이 아니라, 모든 `spring`  프로세스들을 kill 하고 싶다면, `pkill` 명령을 사용할 수 있다.
+
+   ```shell
+   $ pkill -15 -f spring
+   ```
+
+   * `pkill` 은 pid 가 아닌 프로세스 이름으로 동작한다.
+   * `-f` 옵션을 붙이면  `$ ps aux | grep spring` 의 모든 출력 결과중에 `spring` 있을 경우 `pkill` 하게 된다. 기본적으로는 프로세스 이름에 spring 이 있을 경우에만 `pkill`.
+
+---
+
+### Exercise
+
+1. `man grep` 를 통해서 ,"line number" 문자열을 검색하고, `sonnets.txt` 에 "rose" 문자열이 등장하는 줄의 번호를 출력하는 명령을 구성해 보자.
+2. 위의 결과에 따르면 2203 번째 마지막 "rose"가 있다. `less sonne.txt` 를 통해 해당 줄로 이동해 보자. (`nG`)
+3. `head`  명령과 pipe 하여, `sonnets.txt` 에서 등장하는 첫 번째 "rose" 문장과 그 줄 번호만을 출력해 보자.
+
+
+
+## 3.5 Summary
+
+| Command                    | Description                  | Example                 |
+| -------------------------- | ---------------------------- | ----------------------- |
+| `curl`                     | URL 과 상호작용              | `$ curl -O`             |
+| `which`                    | 프래그램의 위치(path) 출력   | `$ which curl`          |
+| `head <file>`              | 파일의 앞부분 출력           | `$ head foo`            |
+| `tail <file>`              | 파일의 뒷부분 출력           | `$ tail bar`            |
+| `wc <file>`                | 줄, 단어, 바이트를 카운트    | `$ wc foo`              |
+| `cmd1 | cmd2`              | `cmd1` 을 `cmd2`로 pipe      | `$ head foo | wc`       |
+| `ping <url>`               | 해당 URL 로 핑을 보냄        | `$ ping google.com`     |
+| `less <file>`              | 파일을 탐색할 수 있다.       | `$ less sonnets.txt`    |
+| `grep <string> <file>`     | 해당 문자열을 파일에서 검색  | `$ grep foo bar.txt`    |
+| `grep -i <s> <f>`          | 대소문자 상관없이 검색       | `$ grep -i foo bar.txt` |
+| `ps`                       | 프로세스들을 보여줌          | `$ ps aux`              |
+| `top`                      | 프로세스들을 정렬해서 보여줌 | `$ top`                 |
+| `kill -<level> <pid>`      | 프로세스를 pid로 kill        | `$ kill -15 12345`      |
+| `pkill -<level> -f <name>` | 프로세스를 이름으로 kill     | `$ pkill -15 -f spring` |
+
+---
+
+### Exercise
+
+1. `history` 명령어는 지금까지 실행한 터미널 명령어들을 어느 정도까지 보여준다. 당신의 `history` 중 17 번째 명령어는 무엇이였는지 확인해 보자. (*Hint* : `less` 로 pipe)
+2. 지금까지 실행한 명령어들은 모두 몇 단어일까? (*Hint* : `wc` 로 `history` pipe)
+3. 지금까지  `curl`  명령어를 몇번 사용했나 세어보자.
+4. `curl` 명령어에서 `-OL` 옵션이 뭔지 읽고 설명해보자.
 
