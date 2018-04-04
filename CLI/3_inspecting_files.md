@@ -25,7 +25,7 @@ $ which curl
 * `curl` 이 설치되었다면, 파일을 다운로드 받아보도록 하자.
 
 ```shell
-$ curl -OL cdn.learnenough.com/sonnet.txt
+$ curl -OL neovansoarer.github.io/files/sonnet.txt
 $ ls -rtl
 ```
 
@@ -40,8 +40,8 @@ $ ls -rtl
 ### Exercise
 
 1. 다음을 차례대로 해보자.
-   1. `$ curl -I https://www.learnenough.com/`을 통해 *HTTP 헤더(header)*만 가져와 보자. (`-I` 옵션 : Header만 가져오는 옵션)
-   2. 이번에는 `learnenough.com` 만 헤더정보를 가져와 보자.
+   1. `$ curl -I https://neovansoarer.github.io`을 통해 *HTTP 헤더(header)*만 가져와 보자. (`-I` 옵션 : Header만 가져오는 옵션)
+   2. 이번에는 `https://github.com` 만 헤더정보를 가져와 보자.
    3. 둘의 [HTTP status code](https://ko.wikipedia.org/wiki/HTTP_%EC%83%81%ED%83%9C_%EC%BD%94%EB%93%9C)가 어떻게 다른가? 각 코드는 무엇을 의미하는지 검색해 보자.
 2. `ls` 명령어를 활용하여 `sonnets.txt` 가 있는지 확인하고, 용량이 몇 byte 인지 확인해 보자. (long format을 활용하자)
 3. 2번에서 확인한  용량은 byte로 확인하기에는 너무 크다. 좀더 편하게 확인하기 위해 kb(kilobyte) 로 환산해보자. (보통 1000 byte 를 1kb 로 치지만 정확하게는 2^10 = 1024bytes = 1kb이다.) `ls -l`에서 용량을 좀더 사람이 보기 쉽게(human-readable하게) 해주는 옵션이 `-h` 이다. `-h` 옵션을 사용하여 `sonnet.txt` 가 사람이 읽기 쉬운 용량으로 얼마인지 확인해 보자.

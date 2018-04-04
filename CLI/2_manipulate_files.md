@@ -92,9 +92,9 @@ black_parade.txt
 * 여러가지 옵션들을 붙일 수 있다.
 
 ```shell
-$ ls -a #숨김 파일까지 모두(all) 보여주기.
+$ ls -a # 숨김 파일까지 모두(all) 보여주기.
 
-$ ls -l #long-format으로 보여주기.
+$ ls -l # long-format으로 보여주기.
 
 $ ls -t # 가장 최근에 수정된 순서(time) 로 보여주기.
 
