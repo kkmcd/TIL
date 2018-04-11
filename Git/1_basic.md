@@ -146,9 +146,9 @@ Changes to be commited:
 Git 의 Commit 메세지는
 
  	1. 현재형으로 (Initialized/Initializes => Initialize)
- 	2. 명령하듯이
- 	3. 너무 길지 않게
- 	4. 더 자세한 사항은 "[Shiny new commit style](https://blog.github.com/2011-09-06-shiny-new-commit-styles/)" 참조
+		2. 명령하듯이
+		3. 너무 길지 않게
+		4. 더 자세한 사항은 "[Shiny new commit style](https://blog.github.com/2011-09-06-shiny-new-commit-styles/)" 참조
 
 ![image-20180407050000767](/var/folders/vz/cm0tj7m10g38vbggrw_cybzc0000gp/T/abnerworks.Typora/image-20180407050000767.png)
 
@@ -188,5 +188,6 @@ Date: Thu Mar 15 16:42:22 2018 +0900
 
 
 
-## 1.4 Viewing the diff - 차이 확인하기
+## 1.4 Viewing the diff - 차이(diff) 확인하기
 
+* 잠재적인 커밋 전에 

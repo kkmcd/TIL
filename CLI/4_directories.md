@@ -241,6 +241,167 @@ $ cd .. && git add . && git commit -m 'Finish chapter 4-3' && git push && cd -
 4. 3에서 만든 `nil` 파일을, 생성할 때 사용했던 경로와 다른 방법으로 삭제(`rm`) 해 보자.
 
 
-
 ## 4.4 Renaming, copying, and deleteing directories - 디렉토리 이름바꾸기, 복사하기, 지우기
 
+* 디렉토리의 이름 바꾸기, 복사하기, 지우기의 명령어는 파일에서 사용하는 명령어와 비슷하지만, 약간의 다른 점들이 있다.
+* 가장 차이가 적은 명령어는 `mv` 다. 파일에서와 거의 똑같이 동작한다.
+
+```shell
+$ mkdir foo
+$ mv foo/ bar/
+$ cd foo
+-bash: cd: foo: No such file or directory
+$ cd bar/
+```
+
+* `mv` 명령어가 재대로 동작했음을 Error메세지로 확인할 수 있다.  (`bash` 는 현재 동작하는 shell program 의 이름이다. 이 경우에는, [Bourne Again SHell](https://www.gnu.org/software/bash/) 이다.)
+* 유일하게 존재하는 차이점은, 디렉토리 이름 뒤에 붙은 `/` 이다. (tab 자동 완성을 사용하면, 자동으로 생성됨.)
+
+```shell
+$ cd
+$ mv bar foo
+$ cd foo/
+```
+
+* `/`  를 붙이는 이슈는 `mv` 명령어에서는 사실 전혀 문제가 되지 않는다.
+
+---
+
+* 하지만 `cp` 에서는 이 이슈가 존재하는데, 일반적으로 디렉토리를 복사하는 행위는, 안에 있는 하위 디렉토리와 파일들 까지 모두 복사하려고 하는 것이다. 이럴 경우에, 많은 시스템들이 `/` 를 생략한다. 
+* 또한, 파일들을 복사 할때는, `-r` 옵션 (recursive) 을 붙여야 한다.
+* 예를들어, `text_files` 디렉토리의 내용물을 새로운 `foobar` 디렉토리에 복사하려 한다면, 다음과 같이 작성해야 한다.
+
+```shell
+$ cd ~/CLI/
+$ mkdir foobar
+$ cd foobar/
+$ cp -r ../text_files .
+$ ls
+text_files
+```
+
+* 우선 복사를 위해 `..` 을 사용하여 (상대경로) 한 단계 위에있는 `text_files` 디렉토리를 현재(`.`)  디렉토리에 복사했다.
+* 주의 할 것은, 언급한대로 `/` 를 제외하고 입력한 것인데, 만약 `/`를 포함하면, 다음과 같은 결과가 나타난다.
+
+```shell
+$ cp -r ../text_files/ .
+$ ls
+sonnet_1.txt sonnet_1_reversed.txdt welcome_to_the_black_parade.txt
+```
+
+* 다시말하면
+  * `/` 를 붙일 경우, 해당 디렉토리에 있는 모든 내용을 가져오지만, 디렉토리 자체는 가져오지 않음.
+  * `/` 를 붙이지 않을 경우, 해당 디렉토리 자체를 가져옴.
+* 때분에 일반적으로 디렉토리를 복사할 때는 `/` 를 빼는것이 적절하다.
+* 만약 해당 디렉토리의 내용물만을 가져 오고 싶은 경우에는 다음과 같이 쓰는것이 더 명확하다.
+
+```shell
+$ cp ../text_files/* .
+```
+
+---
+
+* `mv` 이름바꾸기(옮기기) 와 `cp` 복사와 다르게 디렉토리 삭제는 전용 명령어 `rmdir`가 있다.
+* 하지만 경험상, 거의 동작하지 않는다.
+
+```shell
+$ cd 
+$ rmdir second_directory
+rmdir: second_directory/: Directory not empty
+```
+
+* 위의 메세지는 99% 의 명령에서 나오는 에러 메세지인데,  `second_directory` 가 비어있지 않다는 것이다. `rmdir` 은 기본적으로 디렉토리 안의 내용이 아얘 없을때만 동작한다.
+* 물론 해당 디렉토리 안에 있는 모든 파일/디렉토리들을 지우면 되지만 매우 귀찮은 직업이다.
+* 그래서 거의 항상 디렉토리를 삭제할 때는 `rm -rf` 라고 하는 (**r**e**m**ove **r**ecursiveliy **f**iorce) 명령어를 사용하게 된다.
+* 해당 명령어는 해당 디렉토리와 모든 하위 디렉토리/파일들을 **확인 메세지 없이** 삭제한다.
+
+```shell
+$ rm -rf second_directory/
+$ ls second_directory
+ls: second_directory: No shcu file or directory
+```
+
+* 다음 에러는 `second_directory`를 목록에서 보여줄 수 없다는 명령어다. 즉 성공적으로 `second_directory` 를 삭제했다는 것이다.
+* `rm -rf`는 정말 편리한 명령어지만, 명심해야 한다. "With great power comes great responsibility"
+
+
+
+### Grep redux
+
+* 이제 우리는 디렉토리에 대해서도 어느정도 알게 되었고, `grep` 이라는 유용한 toolkit 역시 사용 할 수 있다.
+* `cp`, `rm`, `grep` 은 'recursive' 옵션을 지원하며, 이 경우에는 디렉토리의 하위 디렉토리와 파일들을 grep 한다.
+* 즉 우리는 특정 문자열이 들어간 파일을 디렉토리 계층구조에서 (hierarchy)  어디에 있는지 찾고 싶을 때 다음과 같이 CLI 를 사용할 수 있다.
+* 일단 다음과 같이 setup 한다. `long_word.txt` 란 파일에 'sesquipedalian' 이라는 단어를 입력한다.
+
+```shell
+$ cd ~/CLI/text_files/
+$ mkdir foo
+$ cd foo/
+$ echo sesquipedalian > long_word.txt
+$ cd ~/CLI
+```
+
+* 그리고 `CLI` 디렉토리에서 해당 단어를 포함하는 파일을 찾아 보는 것이다.
+
+```shell
+$ grep sesquipedalian text_files # Doesn't work
+grep: text_files: Is a directory
+```
+
+* 써 있듯이 grep 로는 디렉토리를 탐색할 수 없다.
+
+```shell
+$ grep -r sesquipedalian text_files
+text_files/foo/long_word.txt:sesquipedalian
+```
+
+* 보통 대/소문자는 신경 쓰지 않지만, 혹시 모를 경우에 대비해 `-i` 옵션을 붙이는 습관을 들이는 것도 좋다.
+
+```shell
+$ grep -ri sesquipedalian text_files
+text_files/foo/long_word.txt:sesquipedalian
+```
+
+* `grep -ri`를 장착한 이상, 우리는 이제 디렉토리들 안에서 원하는 문장이 들어간 파일을 자유롭게 찾아 낼 수 있다.
+
+
+
+### Exercises
+
+1. `foo` 디렉토리 하위에  `bar` 라는 디렉토리까지 한번에 만들고, `bar` 디렉토리를 `baz` 로 이름을 바꿔보자.
+2. `text_files` 안에 들어있는 모든 파일들을 *디렉토리까지 포함해* `foo` 디렉토리로 복사해보자.
+3. `text_files` 안에 들어있는 모든 파일들을 *디렉토리를 제외하고* `foo` 디렉토리로 복사해보자.
+4. `foo` 디렉토리를 모두 한번에 삭제해보자.
+
+
+
+## 4.5 Summary
+
+| Command                | Description                  | Example                 |
+| ---------------------- | ---------------------------- | ----------------------- |
+| `mkdir <name`          | <name> 디렉토리 생성         | `$ mkdir foo`           |
+| `pwd`                  | print working directory      | `$ pwd`                 |
+| `cd <dir>`             | <dir> 로 이동                | `$ cd foo/`             |
+| `cd ~/<dir>`           | 홈의 상대 <dir> 로 이동      | `$ cd ~/foo/`           |
+| `cd`                   | 홈 dir 로 이동               | `$ cd`                  |
+| `cd -`                 | 이전 dir 로 이동             | `$ cd ; pwd ; cd-`      |
+| `.`                    | 현재 있는 dir                | `$ cp ~/foo.txt .`      |
+| `..`                   | 한 단계 상위 dir             | `$ cd ..`               |
+| `find`                 | 파일&디렉토리 찾기           | `$ find . -name foo*.*` |
+| `cp -r <old> <new>`    | 재귀적 복사                  | `$ cp -r ~/foo .`       |
+| `rm -rf <dir>`         | <dir> 의 파일/dir 모두 삭제  | `$ rm -rf foo/`         |
+| `grep -ri <str> <dir>` | 재귀적 case-insensitive grep | `$ grep -ri foo bar/`   |
+
+
+
+### Exercises
+
+1. 홈 디렉토리에서 시작하여, 한줄로 다음 커맨드들을 작성해보자.
+   1. `foo` 라는 dir 을 만든다.
+   2. `foo` 로 현재 위치를 바꾼다.
+   3.  "baz" 라는 내용이 들어간 `bar` 라는 파일을 생성한다.
+   4. `bar` 의 내용물을 출력한다.
+   5. 이전에 왔던 dir 로 돌아간다.
+2. 방금 실행한 명령어를 다시 실행해보자. 몇개의 명령어가 실행되는가? 왜?
+3. 왜 `rm -rf /`라는 명령어가 세상에서 제일 위험한지, 그리고 농담으로라도 터미널에 입력하면 안되는지 설명해 보자.
+4. `rm -rf /` 를 더 위험하게 만드는 방법은 무엇이 있을까? 이 커맨드는 입력이 아니라 생각도 하면 안된다!
