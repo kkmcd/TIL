@@ -122,7 +122,7 @@ Changes to be commited:
 * **"unstage"** 라는 단어로 유추해보면, `index.html` 파일의 상태가, '*untracked*' 에서 '*staged*' 로 바뀌었다.
 * 특정 파일이 'staged' 되었다는 것은, 해당 파일이 repo 에 추가될 준비가 되었다는 뜻이다.
 * *Untracked*/*Unstaged* 는 Git 이 일반적으로 사용하는 4가지 상태중에 하나이다.
-* 정확히는 untracked 와 unstaged 는 다르지만,  어차피 `git add` 명령이 tracking 과 staging 을 동시에 하기 때문에 큰 의미는 없다.![image-20180412015741185](/var/folders/vz/cm0tj7m10g38vbggrw_cybzc0000gp/T/abnerworks.Typora/image-20180412015741185.png)
+* 정확히는 untracked 와 unstaged 는 다르지만,  어차피 `git add` 명령이 tracking 과 staging 을 동시에 하기 때문에 큰 의미는 없다.![git_status_sequence](./images/git_status_sequence.png)
 
 
 * 위 그림에서 보이듯이, 바뀐 내용을 staging area 에 넣고 나서야, `git commit` 명령을 통해 로컬저장소(Local repo) 의 일부로 만들 수 있다. (`git push` 는 섹션 2.3 에서.)
@@ -149,7 +149,7 @@ Git 의 Commit 메세지는
 		3. 너무 길지 않게
 		4. 더 자세한 사항은 "[Shiny new commit style](https://blog.github.com/2011-09-06-shiny-new-commit-styles/)" 참조
 
-![image-20180412015703650](/var/folders/vz/cm0tj7m10g38vbggrw_cybzc0000gp/T/abnerworks.Typora/image-20180412015703650.png)
+![usual_git_commit](./images/usual_git_commit.png)
 
 ---
 
