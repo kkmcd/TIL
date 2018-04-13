@@ -37,7 +37,7 @@ $ ls -rtl
 
 ---
 
-### Exercise
+### Exercises
 
 1. 다음을 차례대로 해보자.
    1. `$ curl -I https://neovansoarer.github.io`을 통해 *HTTP 헤더(header)*만 가져와 보자. (`-I` 옵션 : Header만 가져오는 옵션)
@@ -149,7 +149,7 @@ $ head sonnets.txt | wc
 
 ---
 
-### Exercise
+### Exercises
 
 1. `$ tail sonnets.txt` 의 결과를 `wc` 로 파이프하여 확인해 보자.
 2. `$ man head` 를 실행하여 `$ head <file>` 할 때 기본적으로 설정된 `<file>` 의 첫 10줄이 아닌 처음 - N번째 줄 까지 보여주는 법을 찾아보자. 
@@ -222,7 +222,7 @@ sonnets.txt
 
 ---
 
-### Exercise
+### Exercises
 
 1. `sonnets.txt` 를 `less` 로 실행하고 , 3페이지 아래로 - 3페이지 위로 이동해 보자. 그리고 파일의 마지막 줄로 갔다가 첫 줄로 이동해 보자.
 2. `All` 이라고 하는 문자열을 검색해 보자. 뒤로 이동하면서 몇번 등장하는지 세어보도록 하자. 그리고 `$ grep All sonnets.txt | wc` 라고 입력하고 본인이 세어본 결과와 비교해 보자.( `grep` 는 다음 챕터에서 배운다! )
@@ -344,7 +344,7 @@ $ grep -i rose sonnets.txt | wc
 
 ---
 
-### Exercise
+### Exercises
 
 1. `man grep` 를 통해서 ,"line number" 문자열을 검색하고, `sonnets.txt` 에 "rose" 문자열이 등장하는 줄의 번호를 출력하는 명령을 구성해 보자.
 2. 위의 결과에 따르면 2203 번째 마지막 "rose"가 있다. `less sonne.txt` 를 통해 해당 줄로 이동해 보자. (`nG`)

@@ -129,8 +129,7 @@ $ touch .hidden.txt
 * `$ ls` 와 `$ls -a` 를 통해 비교해 보자.
 
 
-
-##2.3 Renaming, copying, deleting 
+## 2.3 Renaming, copying, deleting
 
 이름 바꾸기, 복사하기, 지우기를 차례대로 해 볼 예정이다. 
 
@@ -240,7 +239,7 @@ $
 
 
 
-## Summary
+## 2.4 Summary
 
 | Command          | Description                                        | Example                 |
 | ---------------- | -------------------------------------------------- | ----------------------- |
