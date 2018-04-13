@@ -142,12 +142,12 @@ Changes to be commited:
 
 ### Commit 메세지는 어떻게 작성하는가
 
-Git 의 Commit 메세지는
+* Git 의 Commit 메세지는
 
- 	1. 현재형으로 (Initialized/Initializes => Initialize)
-		2. 명령하듯이
-		3. 너무 길지 않게
-		4. 더 자세한 사항은 "[Shiny new commit style](https://blog.github.com/2011-09-06-shiny-new-commit-styles/)" 참조
+   	1. 현재형으로 (Initialized/Initializes => Initialize)
+ 	2. 명령하듯이
+ 	3. 너무 길지 않게
+ 	4. 더 자세한 사항은 "[Shiny new commit style](https://blog.github.com/2011-09-06-shiny-new-commit-styles/)" 참조
 
 ![usual_git_commit](./images/usual_git_commit.png)
 
